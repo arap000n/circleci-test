@@ -1,8 +1,9 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
       - image: cimg/node:lts
     steps:
-      - run: echo "branch => develop"
-      - run: echo "hello world"
+      - checkout
+      - run: npm install
+      - run: npm test
