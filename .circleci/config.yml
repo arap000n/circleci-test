@@ -1,9 +1,19 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+orbs:
+  slack: circleci/slack@4.4.4
+executors:
+  my-executor:
     docker:
       - image: cimg/node:lts
+commands:
+  test-echo:
     steps:
-      - checkout
-      - run: npm install
-      - run: npm test
+      - run: echo Hello CircleCI
+      - slack/notify
+      - slack/status
+jobs:
+  build:
+    executor:
+      name: my-executor
+    steps:
+      - test-echo:
